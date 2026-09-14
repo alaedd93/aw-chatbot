@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: aw-chatbot-postgres
+    environment:
+      POSTGRES_DB: aw_chatbot
+      POSTGRES_USER: aw_user
+      POSTGRES_PASSWORD: aw_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
