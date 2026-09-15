@@ -1,24 +1,37 @@
 package com.awglobal.aw_chatbot.service;
+import com.awglobal.aw_chatbot.dto.ChatbotRequest;
+import com.awglobal.aw_chatbot.dto.ChatbotResponse;
+import com.awglobal.aw_chatbot.mapper.ChatbotMapper;
 import com.awglobal.aw_chatbot.model.chatbot.Chatbot;
 import com.awglobal.aw_chatbot.model.chatbot.ChatbotRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class AwChatbotService {
 
     private final ChatbotRepository chatbotRepository;
+    private final ChatbotMapper chatbotMapper;
 
-    public AwChatbotService(ChatbotRepository chatbotRepository) {
+    public AwChatbotService(ChatbotRepository chatbotRepository,
+                            ChatbotMapper chatbotMapper) {
         this.chatbotRepository = chatbotRepository;
+        this.chatbotMapper = chatbotMapper;
     }
 
-    public Chatbot createChatbot(String name, String provider) {
-        Chatbot chatbot = new Chatbot(name, provider);
-        return chatbotRepository.save(chatbot);
+    public ChatbotResponse createChatbot(ChatbotRequest chatbotRequest) {
+        Chatbot chatbot = new Chatbot(chatbotRequest.name(),
+                chatbotRequest.provider());
+        Chatbot savedChatbot = chatbotRepository.save(chatbot);
+        return chatbotMapper.toResponse(savedChatbot);
     }
 
-    public List<Chatbot> getCustomers() {
-        return chatbotRepository.findAll();
+    public List<ChatbotResponse> getChatbots() {
+        return chatbotRepository.findAll().
+                stream().
+                map(chatbotMapper::toResponse).
+                toList();
     }
 }

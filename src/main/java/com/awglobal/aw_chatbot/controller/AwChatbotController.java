@@ -1,6 +1,7 @@
 package com.awglobal.aw_chatbot.controller;
 
 import com.awglobal.aw_chatbot.dto.ChatbotRequest;
+import com.awglobal.aw_chatbot.dto.ChatbotResponse;
 import com.awglobal.aw_chatbot.model.chatbot.Chatbot;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,15 +20,12 @@ public class AwChatbotController {
     }
 
     @GetMapping
-    public List<Chatbot> getCustomers() {
-        return awChatbotService.getCustomers();
+    public List<ChatbotResponse> getChatbot() {
+        return awChatbotService.getChatbots();
     }
 
     @PostMapping
-    public Chatbot createCustomer(@RequestBody Chatbot chatbot) {
-        return awChatbotService.createChatbot(
-                chatbot.getName(),
-                chatbot.getProvider()
-        );
+    public ChatbotResponse createChatbot(@RequestBody ChatbotRequest chatbotRequest) {
+        return awChatbotService.createChatbot(chatbotRequest);
     }
 }
