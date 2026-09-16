@@ -1,4 +1,4 @@
-package com.awglobal.aw_chatbot;
+package com.awglobal.aw_chatbot.config;
 
 import jakarta.servlet.DispatcherType;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 
 @Configuration
-public class Config {
+public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http,
