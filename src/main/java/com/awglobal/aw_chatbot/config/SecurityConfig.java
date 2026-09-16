@@ -44,6 +44,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/chatbots")
                         .hasRole("CHATBOT_WRITE")
 
+                        .requestMatchers(HttpMethod.POST, "/api/chat")
+                        .hasRole("CHATBOT_USE")
+
                         .anyRequest().denyAll()
                 )
 
