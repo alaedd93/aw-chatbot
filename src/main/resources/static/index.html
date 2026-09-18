@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AW AI Assistant</title>
+
+    <!-- Prevent unnecessary /favicon.ico request -->
+    <link rel="icon" href="data:,">
+
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <header class="app-header">
+
+        <div>
+            <h1>AW AI Assistant</h1>
+
+            <p class="subtitle">
+                Enterprise AI powered by Amazon Bedrock
+            </p>
+        </div>
+
+        <div class="status-container">
+            <span
+                    id="connection-status"
+                    class="status status-disconnected"
+            >
+                Token required
+            </span>
+        </div>
+
+    </header>
+
+
+    <!-- Temporary development authentication -->
+    <section class="auth-panel">
+
+        <h2>Development authentication</h2>
+
+        <p>
+            Paste a Keycloak access token.
+            Part 5 will replace this with browser login.
+        </p>
+
+        <form id="token-form">
+
+            <input
+                    id="token-input"
+                    type="password"
+                    placeholder="Paste JWT access token..."
+                    autocomplete="off"
+                    required
+            >
+
+            <button type="submit">
+                Load token
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <main
+            id="messages"
+            class="messages"
+            aria-live="polite"
+    >
+
+        <div class="message assistant-message">
+
+            <div class="message-label">
+                AW Assistant
+            </div>
+
+            <div class="message-content">
+                Hello. Ask me something once your token is loaded.
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <div
+            id="error-message"
+            class="error-message hidden"
+    ></div>
+
+
+    <form
+            id="chat-form"
+            class="chat-form"
+    >
+
+        <textarea
+                id="message-input"
+                rows="1"
+                maxlength="4000"
+                placeholder="Ask AW Assistant..."
+                required
+        ></textarea>
+
+        <button
+                id="send-button"
+                type="submit"
+        >
+            Send
+        </button>
+
+    </form>
+
+</div>
+
+<script src="/app.js"></script>
+
+</body>
+
+</html>
