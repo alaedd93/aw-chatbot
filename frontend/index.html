@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -11,10 +12,11 @@
 
     <title>AW AI Assistant</title>
 
-    <!-- Prevent unnecessary /favicon.ico request -->
-    <link rel="icon" href="data:,">
+    <link
+            rel="icon"
+            href="data:,"
+    >
 
-    <link rel="stylesheet" href="/styles.css">
 </head>
 
 <body>
@@ -24,52 +26,51 @@
     <header class="app-header">
 
         <div>
-            <h1>AW AI Assistant</h1>
+
+            <h1>
+                AW AI Assistant
+            </h1>
 
             <p class="subtitle">
                 Enterprise AI powered by Amazon Bedrock
             </p>
+
         </div>
 
-        <div class="status-container">
+
+        <div class="auth-actions">
+
             <span
-                    id="connection-status"
-                    class="status status-disconnected"
+                    id="user-name"
+                    class="user-name hidden"
+            ></span>
+
+            <button
+                    id="login-button"
+                    type="button"
             >
-                Token required
-            </span>
+                Sign in
+            </button>
+
+            <button
+                    id="logout-button"
+                    type="button"
+                    class="hidden"
+            >
+                Sign out
+            </button>
+
         </div>
 
     </header>
 
 
-    <!-- Temporary development authentication -->
-    <section class="auth-panel">
-
-        <h2>Development authentication</h2>
-
-        <p>
-            Paste a Keycloak access token.
-            Part 5 will replace this with browser login.
-        </p>
-
-        <form id="token-form">
-
-            <input
-                    id="token-input"
-                    type="password"
-                    placeholder="Paste JWT access token..."
-                    autocomplete="off"
-                    required
-            >
-
-            <button type="submit">
-                Load token
-            </button>
-
-        </form>
-
-    </section>
+    <div
+            id="auth-status"
+            class="auth-status"
+    >
+        Sign in to start chatting.
+    </div>
 
 
     <main
@@ -85,7 +86,7 @@
             </div>
 
             <div class="message-content">
-                Hello. Ask me something once your token is loaded.
+                Welcome. Sign in to start a conversation.
             </div>
 
         </div>
@@ -106,15 +107,17 @@
 
         <textarea
                 id="message-input"
-                rows="1"
                 maxlength="4000"
-                placeholder="Ask AW Assistant..."
+                rows="1"
+                placeholder="Sign in to start chatting..."
+                disabled
                 required
         ></textarea>
 
         <button
                 id="send-button"
                 type="submit"
+                disabled
         >
             Send
         </button>
@@ -123,7 +126,11 @@
 
 </div>
 
-<script src="/app.js"></script>
+
+<script
+        type="module"
+        src="/app.js"
+></script>
 
 </body>
 

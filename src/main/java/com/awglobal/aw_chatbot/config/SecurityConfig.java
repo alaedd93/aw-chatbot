@@ -43,8 +43,7 @@ public class SecurityConfig {
                                 HttpMethod.GET,
                                 "/",
                                 "/index.html",
-                                "/styles.css",
-                                "/app.js"
+                                "/assets/**"
                         )
                         .permitAll()
 
