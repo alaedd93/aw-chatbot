@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AW AI Assistant</title>
+
+    <link
+            rel="icon"
+            href="data:,"
+    >
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <header class="app-header">
+
+        <div>
+
+            <h1>
+                AW AI Assistant
+            </h1>
+
+            <p class="subtitle">
+                Enterprise AI powered by Amazon Bedrock
+            </p>
+
+        </div>
+
+
+        <div class="auth-actions">
+
+            <span
+                    id="user-name"
+                    class="user-name hidden"
+            ></span>
+
+            <button
+                    id="login-button"
+                    type="button"
+            >
+                Sign in
+            </button>
+
+            <button
+                    id="logout-button"
+                    type="button"
+                    class="hidden"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <div
+            id="auth-status"
+            class="auth-status"
+    >
+        Sign in to start chatting.
+    </div>
+
+
+    <main
+            id="messages"
+            class="messages"
+            aria-live="polite"
+    >
+
+        <div class="message assistant-message">
+
+            <div class="message-label">
+                AW Assistant
+            </div>
+
+            <div class="message-content">
+                Welcome. Sign in to start a conversation.
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <div
+            id="error-message"
+            class="error-message hidden"
+    ></div>
+
+
+    <form
+            id="chat-form"
+            class="chat-form"
+    >
+
+        <textarea
+                id="message-input"
+                maxlength="4000"
+                rows="1"
+                placeholder="Sign in to start chatting..."
+                disabled
+                required
+        ></textarea>
+
+        <button
+                id="send-button"
+                type="submit"
+                disabled
+        >
+            Send
+        </button>
+
+    </form>
+
+</div>
+
+
+<script
+        type="module"
+        src="/app.js"
+></script>
+
+</body>
+
+</html>

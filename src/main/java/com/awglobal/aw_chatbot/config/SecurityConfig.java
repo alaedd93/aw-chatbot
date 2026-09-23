@@ -38,6 +38,15 @@ public class SecurityConfig {
                         // Allow Spring's internal error dispatch.
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
 
+                        // Public static UI
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/",
+                                "/index.html",
+                                "/assets/**"
+                        )
+                        .permitAll()
+
                         .requestMatchers(HttpMethod.GET, "/api/chatbots")
                         .hasRole("CHATBOT_READ")
 

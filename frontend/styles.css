@@ -1,0 +1,289 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family:
+            Inter,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+}
+
+body {
+    background: #f4f5f7;
+    color: #1f2937;
+}
+
+
+/* Main application */
+
+.app {
+    width: min(900px, 94vw);
+    height: 92vh;
+
+    margin: 4vh auto;
+
+    display: flex;
+    flex-direction: column;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow:
+            0 10px 35px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Header */
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 24px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.subtitle {
+    margin: 4px 0 0;
+
+    font-size: 13px;
+    color: #6b7280;
+}
+
+
+/* Connection status */
+
+.status {
+    display: inline-block;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-disconnected {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.status-connected {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+
+/* Message area */
+
+.messages {
+    flex: 1;
+
+    padding: 24px;
+
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.message {
+    max-width: 75%;
+}
+
+.user-message {
+    align-self: flex-end;
+}
+
+.assistant-message {
+    align-self: flex-start;
+}
+
+.message-label {
+    margin-bottom: 5px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    color: #6b7280;
+}
+
+.user-message .message-label {
+    text-align: right;
+}
+
+.message-content {
+    padding: 12px 14px;
+
+    border-radius: 12px;
+
+    line-height: 1.5;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+.assistant-message .message-content {
+    background: #f3f4f6;
+}
+
+.user-message .message-content {
+    background: #111827;
+    color: white;
+}
+
+
+/* Error */
+
+.error-message {
+    margin: 0 24px 10px;
+
+    padding: 10px 12px;
+
+    background: #fef2f2;
+    color: #b91c1c;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* Chat composer */
+
+.chat-form {
+    display: flex;
+    gap: 10px;
+
+    padding: 16px 20px;
+
+    border-top: 1px solid #e5e7eb;
+
+    background: white;
+}
+
+.chat-form textarea {
+    flex: 1;
+
+    resize: none;
+
+    padding: 12px 14px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+
+    font: inherit;
+
+    line-height: 1.4;
+
+    max-height: 180px;
+}
+
+button {
+    border: none;
+    border-radius: 9px;
+
+    padding: 10px 16px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    background: #111827;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+    .app {
+        width: 100%;
+        height: 100vh;
+
+        margin: 0;
+
+        border-radius: 0;
+    }
+
+    .message {
+        max-width: 88%;
+    }
+
+    .app-header {
+        padding: 16px;
+    }
+
+    .auth-panel {
+        padding: 12px 16px;
+    }
+
+    .messages {
+        padding: 16px;
+    }
+
+}
+
+.auth-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-name {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.auth-status {
+    padding: 10px 24px;
+
+    font-size: 12px;
+
+    color: #6b7280;
+
+    background: #fafafa;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.auth-status.authenticated {
+    color: #047857;
+    background: #ecfdf5;
+}
