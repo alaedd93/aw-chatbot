@@ -42,6 +42,70 @@ const messages =
 const errorMessage =
     document.getElementById("error-message");
 
+const CONVERSATION_ID_KEY =
+    "aw-chatbot-conversation-id";
+
+const newChatButton =
+    document.getElementById("new-chat-button")
+
+newChatButton.addEventListener(
+    "click",
+    () => {
+
+        conversationId =
+            createConversationId();
+
+        resetChatUI();
+
+        messageInput.focus();
+    }
+);
+
+function resetChatUI() {
+
+    messages.replaceChildren();
+
+
+    addMessage(
+        "AW Assistant",
+        "New conversation started. How can I help?",
+        "assistant"
+    );
+
+}
+
+
+function createConversationId() {
+
+    const id =
+        crypto.randomUUID();
+
+    sessionStorage.setItem(
+        CONVERSATION_ID_KEY,
+        id
+    );
+
+    return id;
+}
+
+
+function getConversationId() {
+
+    const existing =
+        sessionStorage.getItem(
+            CONVERSATION_ID_KEY
+        );
+
+    if (existing) {
+        return existing;
+    }
+
+    return createConversationId();
+}
+
+let conversationId =
+    getConversationId();
+
 
 /*
  * -------------------------------------------------------
@@ -203,7 +267,8 @@ chatForm.addEventListener(
 
                         body:
                             JSON.stringify({
-                                message
+                                conversationId: conversationId,
+                                message: message
                             })
 
                     }
@@ -301,6 +366,10 @@ function updateAuthenticationUI(authenticated) {
             "hidden"
         );
 
+        newChatButton.classList.add(
+            "hidden"
+        );
+
 
         authStatus.textContent =
             "Sign in to start chatting.";
@@ -326,6 +395,10 @@ function updateAuthenticationUI(authenticated) {
     );
 
     userName.classList.remove(
+        "hidden"
+    );
+
+    newChatButton.classList.remove(
         "hidden"
     );
 
