@@ -84,3 +84,6 @@ tmp/
 
 postgres-data/
 pgdata/
+
+
+push.sh
