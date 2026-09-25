@@ -8,6 +8,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 @ConditionalOnProperty(
         name = "app.ai.smoke-test.enabled",
@@ -28,9 +30,13 @@ public class BedrockSmokeTestRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) {
 
         log.info("Sending smoke-test request to Amazon Bedrock...");
+        String userId = "user0";
+        UUID conversationId = UUID.randomUUID();
+        String memoryConversationId = userId + ":" + conversationId;
 
         String response = aiChatService.ask(
-                "Say hello from my Spring Boot application."
+                "Say hello from my Spring Boot application.",
+                memoryConversationId
         );
 
         log.info("Bedrock response: {}", response);
