@@ -1,14 +1,21 @@
 package com.awglobal.aw_chatbot.service;
 
+import com.awglobal.aw_chatbot.dto.ChatHistoryMessage;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.messages.MessageType;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Locale;
 
 @Service
 public class AiChatService {
 
     private final ChatClient chatClient;
+
+    private final ChatMemory chatMemory;
 
     public AiChatService(
             ChatClient.Builder chatClientBuilder,
@@ -27,6 +34,8 @@ public class AiChatService {
                                 .build()
                 )
                 .build();
+
+        this.chatMemory = chatMemory;
     }
 
     public String ask(String message, String conversationId) {
@@ -42,4 +51,33 @@ public class AiChatService {
                 .call()
                 .content();
     }
+
+
+    public List<ChatHistoryMessage> getHistory(
+            String conversationId
+    ){
+        return chatMemory.get(conversationId)
+                .stream()
+                .filter( message ->
+                        message.getMessageType() == MessageType.USER
+                ||
+                        message.getMessageType() == MessageType.ASSISTANT
+                )
+                .filter( message ->
+                        message.getText() != null
+                )
+                .map(message ->
+                        new ChatHistoryMessage(
+                                message.getMessageType()
+                                        .name()
+                                        .toLowerCase(Locale.ROOT),
+                                message.getText()
+                        )
+                )
+                .toList();
+
+
+    }
+
+
 }

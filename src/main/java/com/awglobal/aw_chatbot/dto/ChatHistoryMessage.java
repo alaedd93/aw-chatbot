@@ -1,4 +1,8 @@
 package com.awglobal.aw_chatbot.dto;
 
-public class ChatHistoryMessage {
+
+public record ChatHistoryMessage(
+        String role,
+        String content
+) {
 }
