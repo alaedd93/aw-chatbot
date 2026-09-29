@@ -133,6 +133,11 @@ async function initializeAuthentication() {
 
         updateAuthenticationUI(authenticated);
 
+        if (authenticated){
+
+            await restoreHistory();
+        }
+
     }
     catch (error) {
 
@@ -535,6 +540,60 @@ function addMessage(
 
 }
 
+
+/*
+ * -------------------------------------------------------
+ * Message History
+ * -------------------------------------------------------
+ */
+
+
+async function restoreHistory() {
+
+    await keycloak.updateToken(30);
+
+    const response = await fetch(
+    `api/chat/history?conversationId=${encodeURIComponent(conversationId)}`,
+    {
+        method: "GET",
+
+        headers: {
+            "Authorization":
+                `Bearer ${keycloak.token}`
+        }
+    });
+
+    if(!response.ok) {
+
+        await handleHttpError(response);
+
+        return;
+    }
+
+    const history =
+        await response.json();
+
+    if (history.length === 0){
+        return;
+    }
+
+    messages.replaceChildren();
+
+    for (const item of history){
+        addMessage(
+
+            item.role === "user"
+                ? "You"
+                : "AW Assistant",
+
+            item.content,
+
+            item.role
+
+        );
+    }
+
+}
 /*
  * -------------------------------------------------------
  * HTTP errors
